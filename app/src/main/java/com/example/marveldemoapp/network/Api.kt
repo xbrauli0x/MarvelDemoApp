@@ -11,7 +11,8 @@ interface Api {
     fun getCharacters(
         @Query("ts") timestamp: Long?,
         @Query("apikey") apiKey: String?,
-        @Query("hash") hash: String?
+        @Query("hash") hash: String?,
+        @Query("limit") limit: String?
     ): Call<MarvelResponse>
 
 }

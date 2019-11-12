@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- item_marvel_character -->
+    <dimen name="card_item_margin_sides">8dp</dimen>
+    <dimen name="card_item_iv_height">150dp</dimen>
+</resources>

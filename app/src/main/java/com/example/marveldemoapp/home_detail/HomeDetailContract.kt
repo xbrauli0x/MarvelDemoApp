@@ -8,15 +8,16 @@ interface HomeDetailContract {
     interface View : BaseContract.View {
         fun renderMarvelItems(data: List<MarvelItem>?)
         fun onMarvelItemClicked(item: MarvelItem)
+        fun onErrorWhenFetching(msg: String?)
     }
 
     interface Presenter : BaseContract.Presenter {
-        fun getMarvelCharacters()
+        fun getMarvelCharacters(limit: String?)
         fun getMarvelCharacterInfo(item: MarvelItem)
     }
 
     interface Interactor : BaseContract.Interactor {
-        fun fetchMarvelData()
+        fun fetchMarvelData(limit: String?)
         fun fetchMarvelCharacterInfo(item: MarvelItem)
 
         interface ResponseListener {

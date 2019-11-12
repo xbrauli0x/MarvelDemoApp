@@ -8,20 +8,20 @@ class HomeDetailPresenter(var view: HomeDetailContract.View?) : BasePresenter(vi
 
     private val interactor: HomeDetailContract.Interactor by lazy { HomeDetailInteractor(this) }
 
-    override fun getMarvelCharacters() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getMarvelCharacters(limit: String?) {
+        interactor.fetchMarvelData(limit)
     }
 
     override fun getMarvelCharacterInfo(item: MarvelItem) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onMarvelDataFetched(data: List<MarvelItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view?.renderMarvelItems(data)
     }
 
     override fun onErrorFetchingData(msg: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view?.onErrorWhenFetching(msg)
     }
 
 }
