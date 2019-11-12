@@ -69,7 +69,6 @@ class HomeDetailFragment : BaseFragment(), HomeDetailContract.View {
 
     private fun fetchMarvelCharacters() {
         progressBar.visibility = View.VISIBLE
-        val limit = resources.getInteger(R.integer.max_items_allowed)
-        presenter.getMarvelCharacters(limit.toString())
+        presenter.getMarvelCharacters()
     }
 }

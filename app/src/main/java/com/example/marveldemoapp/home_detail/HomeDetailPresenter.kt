@@ -8,8 +8,8 @@ class HomeDetailPresenter(var view: HomeDetailContract.View?) : BasePresenter(vi
 
     private val interactor: HomeDetailContract.Interactor by lazy { HomeDetailInteractor(this) }
 
-    override fun getMarvelCharacters(limit: String?) {
-        interactor.fetchMarvelData(limit)
+    override fun getMarvelCharacters() {
+        interactor.fetchMarvelData()
     }
 
     override fun getMarvelCharacterInfo(item: MarvelItem) {

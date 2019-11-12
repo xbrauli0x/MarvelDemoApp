@@ -12,12 +12,12 @@ interface HomeDetailContract {
     }
 
     interface Presenter : BaseContract.Presenter {
-        fun getMarvelCharacters(limit: String?)
+        fun getMarvelCharacters()
         fun getMarvelCharacterInfo(item: MarvelItem)
     }
 
     interface Interactor : BaseContract.Interactor {
-        fun fetchMarvelData(limit: String?)
+        fun fetchMarvelData()
         fun fetchMarvelCharacterInfo(item: MarvelItem)
 
         interface ResponseListener {

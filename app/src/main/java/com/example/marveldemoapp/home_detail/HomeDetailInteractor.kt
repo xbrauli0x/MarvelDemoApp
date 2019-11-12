@@ -12,8 +12,8 @@ import retrofit2.Response
 class HomeDetailInteractor(var responseListener: HomeDetailContract.Interactor.ResponseListener?) :
     HomeDetailContract.Interactor {
 
-    override fun fetchMarvelData(limit: String?) {
-        val generator = MarvelRequestParamsGenerator(limit)
+    override fun fetchMarvelData() {
+        val generator = MarvelRequestParamsGenerator()
         generator.setUpRequestParams()
         val call = BaseClient.provideMarvelApi()
             .getCharacters(generator.timestamp, generator.apiKey, generator.hash, generator.limit)
