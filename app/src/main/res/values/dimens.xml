@@ -12,5 +12,7 @@
     <!-- item_marvel_character -->
     <dimen name="card_item_margin_sides">8dp</dimen>
     <dimen name="card_item_iv_height">400dp</dimen>
+    <dimen name="card_item_name_height">80dp</dimen>
+    <dimen name="card_item_name_text_size">18sp</dimen>
 
 </resources>

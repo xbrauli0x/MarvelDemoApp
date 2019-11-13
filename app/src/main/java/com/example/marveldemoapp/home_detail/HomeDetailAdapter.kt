@@ -7,22 +7,22 @@ import com.example.marveldemoapp.R
 import com.example.marveldemoapp.models.MarvelItem
 
 class HomeDetailAdapter(private val onClickListener: (MarvelItem) -> Unit) :
-    RecyclerView.Adapter<MarvelItemViewHolder>() {
+    RecyclerView.Adapter<HomeDetailViewHolder>() {
 
     private var data: List<MarvelItem>? = null
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MarvelItemViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): HomeDetailViewHolder {
         val v = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item_marvel_character, viewGroup, false)
-        return MarvelItemViewHolder(v)
+        return HomeDetailViewHolder(v)
     }
 
-    override fun onBindViewHolder(marvelItemVH: MarvelItemViewHolder, index: Int) {
+    override fun onBindViewHolder(homeDetailVH: HomeDetailViewHolder, index: Int) {
         val marvelItem = data?.get(index)
-        marvelItemVH.bind(marvelItem!!, onClickListener)
+        homeDetailVH.bind(marvelItem!!, onClickListener)
     }
 
-    override fun onViewDetachedFromWindow(holder: MarvelItemViewHolder) {
+    override fun onViewDetachedFromWindow(holder: HomeDetailViewHolder) {
         super.onViewDetachedFromWindow(holder)
         holder.unBind()
     }
