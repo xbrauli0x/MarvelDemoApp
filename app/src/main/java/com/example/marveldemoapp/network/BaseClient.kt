@@ -39,12 +39,12 @@ object BaseClient : KoinComponent {
             /*.addInterceptor { chain ->
                 var request = chain.request()
                 request = if (Utils.hasNetwork(provideContext())!!)
-                    request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build()
+                    request.newBuilder().header("Cache-Control", "public, max-age=" + 5).createParams()
                 else
                     request.newBuilder().header(
                         "Cache-Control",
                         "public, only-if-cached, max-stale=" + (60 * 60 * 24 * 7)
-                    ).build()
+                    ).createParams()
                 chain.proceed(request)
             }*/
             .build()

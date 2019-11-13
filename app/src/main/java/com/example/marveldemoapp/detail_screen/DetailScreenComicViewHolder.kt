@@ -1,31 +1,30 @@
-package com.example.marveldemoapp.home_detail
+package com.example.marveldemoapp.detail_screen
 
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
 import com.example.marveldemoapp.R
 import com.example.marveldemoapp.base.BaseViewHolder
-import com.example.marveldemoapp.models.MarvelItem
+import com.example.marveldemoapp.models.Comic
 import com.example.marveldemoapp.models.Thumbnail
-import kotlinx.android.synthetic.main.item_marvel_character.view.*
+import kotlinx.android.synthetic.main.item_comic.view.*
 
-class HomeDetailViewHolder(itemView: View) : BaseViewHolder<MarvelItem>(itemView) {
+class DetailScreenComicViewHolder(itemView: View) : BaseViewHolder<Comic>(itemView) {
 
-    override fun bind(model: MarvelItem, onClickedItem: (MarvelItem) -> Unit) {
+    override fun bind(model: Comic, onClickedItem: (Comic) -> Unit) {
         super.bind(model, onClickedItem)
-        itemView.txtName.text = model.name
+        itemView.txtComicName.text = model.title
         loadImage(model)
     }
 
-    private fun loadImage(model: MarvelItem) {
+    private fun loadImage(model: Comic) {
         val thumbnail: Thumbnail? = model.thumbnail
         val url: String? = thumbnail?.url
-        Log.d("Img-MarvelItem", "${model.name} : $url")
+        Log.d("Img-Comic", "${model.title} : $url")
         Glide.with(itemView)
             .load(url)
             .centerCrop()
             .placeholder(R.drawable.ic_launcher_foreground)
-            .into(itemView.ivMarvelThumbnail)
+            .into(itemView.ivComicImage)
     }
-
 }

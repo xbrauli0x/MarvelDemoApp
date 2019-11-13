@@ -6,8 +6,19 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <!-- fragment_home_detail -->
+    <!-- activity_detail_screen -->
+    <dimen name="detail_iv_height">400dp</dimen>
+    <dimen name="detail_rv_comics_height">200dp</dimen>
+    <dimen name="detail_description_text_size">14sp</dimen>
+
+    <!-- activity_home_detail -->
     <dimen name="progress_bar_height">25dp</dimen>
+
+    <!-- item_comic  -->
+    <dimen name="item_comic_iv_width">150dp</dimen>
+    <dimen name="item_comic_iv_height">200dp</dimen>
+    <dimen name="item_comic_margin_side">4dp</dimen>
+    <dimen name="item_comic_name_text_size">16sp</dimen>
 
     <!-- item_marvel_character -->
     <dimen name="card_item_margin_sides">8dp</dimen>

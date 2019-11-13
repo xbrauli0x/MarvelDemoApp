@@ -15,7 +15,6 @@
             android:id="@+id/ivMarvelThumbnail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/card_item_margin_sides"
             android:scaleType="fitCenter"
             android:src="@mipmap/ic_launcher"
             tools:srcCompat="@tools:sample/avatars" />

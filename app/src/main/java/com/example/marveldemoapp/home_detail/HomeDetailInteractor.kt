@@ -1,48 +1,34 @@
 package com.example.marveldemoapp.home_detail
 
-import com.example.marveldemoapp.models.Data
-import com.example.marveldemoapp.models.MarvelItem
-import com.example.marveldemoapp.models.MarvelResponse
+import android.content.Context
+import com.example.marveldemoapp.R
 import com.example.marveldemoapp.network.BaseClient
-import com.example.marveldemoapp.utils.MarvelRequestParamsGenerator
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.marveldemoapp.utils.MarvelRequestGenerator
+import com.example.marveldemoapp.utils.MarvelResponseHandler
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 class HomeDetailInteractor(var responseListener: HomeDetailContract.Interactor.ResponseListener?) :
-    HomeDetailContract.Interactor {
+    HomeDetailContract.Interactor, KoinComponent {
 
     override fun fetchMarvelData() {
-        val generator = MarvelRequestParamsGenerator()
-        generator.setUpRequestParams()
+        val limit = getMaxItemsAllowed()
+        val generator = MarvelRequestGenerator.createParams()
         val call = BaseClient.provideMarvelApi()
-            .getCharacters(generator.timestamp, generator.apiKey, generator.hash, generator.limit)
-        call.enqueue(object : Callback<MarvelResponse> {
-            override fun onFailure(call: Call<MarvelResponse>, t: Throwable) {
-                responseListener?.onErrorFetchingData(t.message)
-            }
-
-            override fun onResponse(
-                call: Call<MarvelResponse>,
-                response: Response<MarvelResponse>
-            ) {
-                if (response.isSuccessful) {
-                    getMarvelCharactersFromResponse(response)
-                } else {
-                    responseListener?.onErrorFetchingData(response.message())
-                }
-            }
-        })
+            .getCharacters(generator.timestamp, generator.apiKey, generator.hash, limit)
+        val responseHandler = MarvelResponseHandler(call,
+            {
+                responseListener?.onMarvelDataFetched(it)
+            },
+            {
+                responseListener?.onErrorFetchingData(it)
+            })
+        responseHandler.makeRequest()
     }
 
-    private fun getMarvelCharactersFromResponse(response: Response<MarvelResponse>) {
-        val marvelResponse: MarvelResponse? = response.body()
-        val data: Data? = marvelResponse?.data
-        responseListener?.onMarvelDataFetched(data?.results)
+
+    private fun getMaxItemsAllowed(): String {
+        val ctx: Context by inject()
+        return ctx.resources.getInteger(R.integer.max_items_allowed).toString()
     }
-
-    override fun fetchMarvelCharacterInfo(item: MarvelItem) {
-
-    }
-
 }

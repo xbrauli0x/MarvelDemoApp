@@ -12,10 +12,6 @@ class HomeDetailPresenter(var view: HomeDetailContract.View?) : BasePresenter(vi
         interactor.fetchMarvelData()
     }
 
-    override fun getMarvelCharacterInfo(item: MarvelItem) {
-
-    }
-
     override fun onMarvelDataFetched(data: List<MarvelItem>?) {
         view?.renderMarvelItems(data)
     }
@@ -23,5 +19,4 @@ class HomeDetailPresenter(var view: HomeDetailContract.View?) : BasePresenter(vi
     override fun onErrorFetchingData(msg: String?) {
         view?.onErrorWhenFetching(msg)
     }
-
 }

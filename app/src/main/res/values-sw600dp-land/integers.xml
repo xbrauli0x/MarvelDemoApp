@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- fragment_home_detail -->
+    <!-- activity_home_detail -->
     <integer name="max_items_allowed">20</integer>
     <integer name="items_per_column">5</integer>
 </resources>
