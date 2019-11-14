@@ -9,14 +9,17 @@ class HomeDetailPresenter(var view: HomeDetailContract.View?) : BasePresenter(vi
     private val interactor: HomeDetailContract.Interactor by lazy { HomeDetailInteractor(this) }
 
     override fun getMarvelCharacters() {
+        view?.showProgressBar()
         interactor.fetchMarvelData()
     }
 
     override fun onMarvelDataFetched(data: List<MarvelItem>?) {
+        view?.stopProgressBar()
         view?.renderMarvelItems(data)
     }
 
     override fun onErrorFetchingData(msg: String?) {
+        view?.stopProgressBar()
         view?.onErrorWhenFetching(msg)
     }
 }

@@ -9,11 +9,13 @@ interface DetailScreenContract {
     interface View : BaseContract.View {
         fun renderComics(data: List<Comic>?)
         fun renderCharacterInfo(marvelItem: MarvelItem?)
+        fun onRequestError(msg: String?)
+        fun showProgressBar()
+        fun stopProgressBar()
     }
 
     interface Presenter : BaseContract.Presenter {
-        fun getCharacterInfo(characterId: String)
-        fun getComics(characterId: String)
+        fun getCharacterDetail(characterId: String)
     }
 
     interface Interactor : BaseContract.Interactor {
@@ -25,6 +27,5 @@ interface DetailScreenContract {
             fun onCharacterInfoFetched(data: List<MarvelItem>?)
             fun onErrorFetchingData(msg: String?)
         }
-
     }
 }

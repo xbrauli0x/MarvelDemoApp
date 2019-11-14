@@ -9,24 +9,24 @@ class DetailScreenPresenter(var view: DetailScreenContract.View?) : BasePresente
 
     private val interactor: DetailScreenContract.Interactor by lazy { DetailScreenInteractor(this) }
 
-    override fun getCharacterInfo(characterId: String) {
+    override fun getCharacterDetail(characterId: String) {
+        view?.showProgressBar()
         interactor.fetchCharacterInfo(characterId)
     }
 
-    override fun getComics(characterId: String) {
-        interactor.fetchComics(characterId)
-    }
-
     override fun onComicsFetched(data: List<Comic>?) {
+        view?.stopProgressBar()
         view?.renderComics(data)
     }
 
     override fun onCharacterInfoFetched(data: List<MarvelItem>?) {
         val item: MarvelItem? = data?.first()
         view?.renderCharacterInfo(item)
+        interactor.fetchComics(item?.id!!)
     }
 
     override fun onErrorFetchingData(msg: String?) {
-
+        view?.stopProgressBar()
+        view?.onRequestError(msg)
     }
 }

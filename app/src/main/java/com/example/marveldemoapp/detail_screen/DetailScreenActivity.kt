@@ -15,6 +15,7 @@ import com.example.marveldemoapp.models.MarvelItem
 import com.example.marveldemoapp.models.Thumbnail
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_detail_screen.*
+import kotlinx.android.synthetic.main.content_detail_screen.*
 
 class DetailScreenActivity : BaseActivity(), DetailScreenContract.View {
 
@@ -25,13 +26,28 @@ class DetailScreenActivity : BaseActivity(), DetailScreenContract.View {
         setContentView(R.layout.activity_detail_screen)
         setUpToolbar()
         setUpComicsRecyclerView()
+        getCharacterData()
+    }
+
+    private fun getCharacterData() {
         val characterId: String? = getCharacterId()
-        fetchCharacterInfo(characterId)
-        fetchComics(characterId)
+        presenter.getCharacterDetail(characterId!!)
     }
 
     override fun getBasePresenter(): BaseContract.Presenter? {
         return presenter
+    }
+
+    override fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun stopProgressBar() {
+        progressBar.visibility = View.INVISIBLE
+    }
+
+    override fun onRequestError(msg: String?) {
+        showSnackbarMsg(msg)
     }
 
     private fun setUpToolbar() {
@@ -55,22 +71,14 @@ class DetailScreenActivity : BaseActivity(), DetailScreenContract.View {
         showSnackbarMsg("${comic.id} - ${comic.title}")
     }
 
-    private fun showSnackbarMsg(msg: String) {
+    private fun showSnackbarMsg(msg: String?) {
         val v: View = findViewById(android.R.id.content)
-        Snackbar.make(v, msg, Snackbar.LENGTH_LONG)
+        Snackbar.make(v, msg!!, Snackbar.LENGTH_LONG)
             .setAction(android.R.string.yes, null).show()
     }
 
     private fun getCharacterId(): String? {
         return intent.getStringExtra(MarvelItem.TAG)
-    }
-
-    private fun fetchCharacterInfo(characterId: String?) {
-        presenter.getCharacterInfo(characterId!!)
-    }
-
-    private fun fetchComics(characterId: String?) {
-        presenter.getComics(characterId!!)
     }
 
     override fun renderComics(data: List<Comic>?) {
@@ -88,5 +96,6 @@ class DetailScreenActivity : BaseActivity(), DetailScreenContract.View {
             .optionalCenterCrop()
             .placeholder(R.drawable.ic_launcher_foreground)
             .into(ivDetailCharacter)
+
     }
 }

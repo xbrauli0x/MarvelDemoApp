@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- activity_detail_screen -->
+    <!-- content_detail_screen -->
     <integer name="comics_per_request">20</integer>
 
     <!-- activity_home_detail -->

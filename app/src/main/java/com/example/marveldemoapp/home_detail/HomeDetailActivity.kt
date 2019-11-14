@@ -6,18 +6,16 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.marveldemoapp.R
 import com.example.marveldemoapp.base.BaseActivity
 import com.example.marveldemoapp.base.BaseContract
 import com.example.marveldemoapp.detail_screen.DetailScreenActivity
 import com.example.marveldemoapp.models.MarvelItem
-import com.example.marveldemoapp.utils.Utils
 import com.example.marveldemoapp.widgets.GridItemDecoration
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.activity_home_detail.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 class HomeDetailActivity : BaseActivity(), HomeDetailContract.View {
 
@@ -30,10 +28,18 @@ class HomeDetailActivity : BaseActivity(), HomeDetailContract.View {
         }
         setContentView(R.layout.activity_main)
         setUpToolbar()
-        val dis:Int = resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
+        val dis: Int = resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
         Log.d("DIS Screen", "" + dis)
         setUpMarvelCharactersRecyclerView()
         fetchMarvelCharacters()
+    }
+
+    override fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun stopProgressBar() {
+        progressBar.visibility = View.INVISIBLE
     }
 
     override fun getBasePresenter(): BaseContract.Presenter? {
@@ -54,7 +60,6 @@ class HomeDetailActivity : BaseActivity(), HomeDetailContract.View {
     }
 
     override fun renderMarvelItems(data: List<MarvelItem>?) {
-        progressBar.visibility = View.INVISIBLE
         val adapter = rvData.adapter as HomeDetailAdapter
         adapter.updateData(data)
     }
@@ -68,7 +73,6 @@ class HomeDetailActivity : BaseActivity(), HomeDetailContract.View {
     }
 
     override fun onErrorWhenFetching(msg: String?) {
-        progressBar.visibility = View.INVISIBLE
         Snackbar.make(coordinator_layout, msg!!, Snackbar.LENGTH_LONG)
             .setAction(android.R.string.yes, null).show()
     }
@@ -86,7 +90,6 @@ class HomeDetailActivity : BaseActivity(), HomeDetailContract.View {
     }
 
     private fun fetchMarvelCharacters() {
-        progressBar.visibility = View.VISIBLE
         presenter.getMarvelCharacters()
     }
 }

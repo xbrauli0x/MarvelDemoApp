@@ -9,6 +9,8 @@ interface HomeDetailContract {
         fun renderMarvelItems(data: List<MarvelItem>?)
         fun onMarvelItemClicked(item: MarvelItem)
         fun onErrorWhenFetching(msg: String?)
+        fun showProgressBar()
+        fun stopProgressBar()
     }
 
     interface Presenter : BaseContract.Presenter {
